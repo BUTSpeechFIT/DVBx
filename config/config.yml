@@ -1,0 +1,29 @@
+avg_last_n_iters: -1
+backprop_type: "after_each_iter"
+batch_size: 8
+early_stop_vb: false
+eval_max_iters: 40
+eval_early_stop_vb: true
+epochs: 500
+initial_loss_scale: 1
+loss: "EDE"
+lr:
+    fa: 5e-4
+    other: 1e-2
+max_iters: 10
+regularization_coeff_eb: 0
+regularization_coeff_ew: 0
+trainable_params:
+    - "fa"
+    - "fb"
+    - "loss_weights"
+    - "loss_scale"
+    - "ism"
+    - "lp"
+#    - "phi"
+#    - "tr"
+use_full_tr: false
+use_loss_scale: false
+use_loss_weights: false
+use_regularization: false
+use_sigmoid_loss_weights: false
