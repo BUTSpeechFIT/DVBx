@@ -15,7 +15,7 @@ import time
 
 import kaldi_io
 import numpy as np
-import onnxruntime
+# import onnxruntime
 import soundfile as sf
 import torch.backends
 
