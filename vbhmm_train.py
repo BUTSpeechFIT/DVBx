@@ -245,8 +245,6 @@ if __name__ == '__main__':
                         help='Path to the directory containing training ground truth RTTM files.')
     parser.add_argument('--in-val-gt-rttm-dir', required=True, type=str,
                         help='Path to the directory containing validation ground truth RTTM files.')
-    parser.add_argument('--out-rttm-dir', required=True, type=str,
-                        help='Directory to store output rttm files')
     parser.add_argument('--xvec-ark-dir', required=True, type=str,
                         help='Kaldi ark with x-vectors from one or more '
                              'input recordings. Attention: all x-vectors from '
@@ -365,7 +363,8 @@ if __name__ == '__main__':
     parser.add_argument('--loss', type=str, default='EDE', help='Training loss, either BCE or DER.')
     parser.add_argument('--lr', help='Learning rates.')
     parser.add_argument('--max-iters', type=int, default=10,
-                        help='Max number of VB iterations during training (if early_stop_vb is False, than it\'')
+                        help='Max number of VB iterations during training (if early_stop_vb is False, than it will '
+                             'run --max-iters of VB iterations no matter the ELBO convergence')
     parser.add_argument('--regularization-coeff-eb', default=0, type=float,
                         help='KL divergence between-speaker covariance matrix regularization coefficient.')
     parser.add_argument('--regularization-coeff-ew', default=0, type=float,

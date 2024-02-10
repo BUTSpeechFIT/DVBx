@@ -36,5 +36,3 @@ while IFS= read -r line; do
     	echo "python3 $DIR/predict_and_label.py --seg-len 144 --seg-jump 24 --model $MODEL --weights $WEIGHTS --gpus= $MDL_WEIGHTS --ndim 64 --embed-dim $EMBED_DIM --in-file-list $OUT_DIR/lists/$line".txt" --in-lab-dir $LAB_DIR --in-wav-dir $WAV_DIR --out-ark-fn $OUT_ARK_FILE --out-seg-fn $OUT_SEG_FILE --in-rttm-dir $GT_RTTM_DIR --out-xvector-label-GT-dir $OUT_GT_LABS_DIR" >> $TASKFILE
     fi
 done < $FILE_LIST
-
-bash $TASKFILE

@@ -29,6 +29,25 @@ labels, use:
 
     ./prepare_train_set.sh diarization experiment_dir xvector_dir
 
+The `prepare_train_set.sh` script contains a few variables that have to be changed:
+```bash
+model_type="8k" # Either 8k or 16k
+WAV_DIR= # wav files directory
+LAB_DIR= # lab files directory with VAD segments
+REF_DIR= # reference rttm files directory
+FILE_LIST= # txt list of files to process
+```
+- `model_type` can be set either to `8k` or `16k` - to get the best performance, set the type according to your dataset sampling frequency (`8k` model works on `16k` data and vice-versa with suboptimal performance)
+- `WAV_DIR` contains a path (recommend using absolute paths) to a directory with `.wav` files.
+- `LAB_DIR` contains a path to a directory with VAD segments (i.e. a text file corresponding to KALDI segments format)
+  - An example of a single line representing a single VAD speech segment: `0.130	4.010	speech`
+- `REF_DIR` contains a path to a directory with reference RTTM files
+- `FILE_LIST` is a path to a text file containing the names of files to process
+
+The `process_train_set.sh` loops through all lines in `FILE_LIST` and looks at the following paths: `${WAV_DIR}/${fn}.wav`, `${LAB_DIR}/${fn}.lab`, `${REF_DIR}/${fn}.rttm`, where `${fn}` denotes a single line in `FILE_LIST`.
+Therefore, all the files (wav, VAD segments, RTTMs) need to have the same name (i.e. `iaaa.wav`, `iaaa.lab`, `iaaa.rttm`) and `FILE_LIST` must contain a single name per line (without any extensions).
+Only the files listed in the `FILE_LIST` will be processed!
+
 You will obtain the GT and the AHC for the xvectors in the directories:
 
     $exp_dir/xvector_GT_labels
@@ -97,7 +116,6 @@ torchrun --nnodes 1
          --in-vallist data_lists/callhome_p1_val_half.txt
          --lda-dim 128
          --loopP 0.5
-         --out-rttm-dir experiment_dir
          --plda-file VBx/models/ResNet101_8kHz/plda
          --segments-dir xvector_dir/segments/
          --threshold -0.015
@@ -106,6 +124,7 @@ torchrun --nnodes 1
          --val-xvec-ark-dir xvector_dir/xvectors/
          --xvec-ark-dir xvector_dir/xvectors/
          --xvec-transform VBx/models/ResNet101_8kHz/transform.h5
+         --run-dist
 ```
 
 ##### Parameters description
@@ -138,7 +157,6 @@ torchrun --nnodes 1
 | lda-dim                     |  Int   | Number of LDA dimensions the x-vectors for VBx are reduced to.                                                                         |
 | loopP                       | Float  | Hyperparameter for VBx (check the publication).                                                                                        |
 | num-threads-per-worker      |  Int   | Number of threads per a single worker (PyTorch op parallelization).                                                                    |
-| out-rttm-dir                | String | Path to directory to store output rttm files.                                                                                          |
 | plda-file                   | String | Path to the Kaldi PLDA model file.                                                                                                     |
 | plot-gammas                 |  Bool  | If present, system will plot gammas throughout the training to tensorbord.                                                             |
 | run-dist                    |  Bool  | If torchrun is used, this flag needs to be present.                                                                                    |
