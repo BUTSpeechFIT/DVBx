@@ -196,14 +196,18 @@ torchrun --nnodes 1
 In case of using the software, please cite: [Discriminative Training of VBx Diarization](https://arxiv.org/abs/2310.02732)
 
 ```
-@misc{klement2023discriminative,
-      title={Discriminative Training of VBx Diarization}, 
-      author={Dominik Klement and Mireia Diez and Federico Landini and Lukáš Burget and Anna Silnova and Marc Delcroix and Naohiro Tawara},
-      year={2023},
-      eprint={2310.02732},
-      archivePrefix={arXiv},
-      primaryClass={eess.AS}
+@INPROCEEDINGS{10446119,
+  author={Klement, Dominik and Diez, Mireia and Landini, Federico and Burget, Lukáš and Silnova, Anna and Delcroix, Marc and Tawara, Naohiro},
+  booktitle={ICASSP 2024 - 2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, 
+  title={Discriminative Training of VBx Diarization}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={11871-11875},
+  keywords={Training;Analytical models;Hidden Markov models;Bayes methods;Speech processing;Tuning;Standards;speaker diarization;VBx;clustering;variational Bayes;discriminative training},
+  doi={10.1109/ICASSP48485.2024.10446119}
 }
+
 ```
 ### Licence
 This software is licensed under the MIT licence (see `LICENSE` file).
